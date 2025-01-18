@@ -22,7 +22,7 @@ A lightweight BitTorrent client implementation in C++ that supports downloading 
 ### Installing Dependencies
 
 #### Ubuntu/Debian
-sudo apt-get install libcurl4-openssl-dev
+```sudo apt-get install libcurl4-openssl-dev```
 
 #### Windows
 - Install [vcpkg](https://github.com/microsoft/vcpkg)

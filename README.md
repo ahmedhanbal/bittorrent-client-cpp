@@ -90,7 +90,7 @@ g++ src/Main.cpp -std=c++17 -lcurl -lws2_32 -o bittorrent.exe
 - src/lib/
   - [decode.hpp](src/lib/decode.hpp) - Bencode encoding/decoding
   - [torrent.hpp](src/lib/torrent.hpp) - Torrent metadata structures
-  - [torrent.hpp](src/lib/peers.hpp) - Peer discovery and communication
+  - [peers.hpp](src/lib/peers.hpp) - Peer discovery and communication
   - [download.hpp](src/lib/download.hpp) - Download functionality
   - [utils.hpp](src/lib/utils.hpp) - Helper functions
   - [sha1.hpp](src/lib/sha1.hpp) - SHA1 hash implementation

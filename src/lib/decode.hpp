@@ -7,7 +7,6 @@
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
-// Declare functions first
 json decode_bencoded_value(std::string::const_iterator& it, const std::string::const_iterator& end);
 json decode_string(std::string::const_iterator& it, const std::string::const_iterator& end);
 json decode_integer(std::string::const_iterator& it, const std::string::const_iterator& end);
@@ -16,7 +15,6 @@ json decode_dict(std::string::const_iterator& it, const std::string::const_itera
 json decode_bencoded_value(const std::string& encoded_value);
 std::string bencode_decoded_value(json &decoded_value);
 
-// Mark all implementations as inline
 inline json decode_string(std::string::const_iterator& it, const std::string::const_iterator& end) {
     std::string number_string;
     while (it != end && std::isdigit(*it)) {

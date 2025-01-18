@@ -86,14 +86,14 @@ g++ src/Main.cpp -std=c++17 -lcurl -lws2_32 -o bittorrent.exe
 
 ## Project Structure
 
-- src/Main.cpp - Entry point and command handling
+- [Main](src/Main.cpp) - Entry point and command handling
 - src/lib/
-  - decode.hpp - Bencode encoding/decoding
-  - torrent.hpp - Torrent metadata structures
-  - peers.hpp - Peer discovery and communication
-  - download.hpp - Download functionality
-  - utils.hpp - Helper functions
-  - sha1.hpp - SHA1 hash implementation
+  - [decode.hpp](src/lib/decode.hpp) - Bencode encoding/decoding
+  - [torrent.hpp](src/lib/torrent.hpp) - Torrent metadata structures
+  - [torrent.hpp](src/lib/peers.hpp) - Peer discovery and communication
+  - [download.hpp](src/lib/download.hpp) - Download functionality
+  - [utils.hpp](src/lib/utils.hpp) - Helper functions
+  - [sha1.hpp](src/lib/sha1.hpp) - SHA1 hash implementation
 
 ## Platform-Specific Notes
 
@@ -112,3 +112,7 @@ g++ src/Main.cpp -std=c++17 -lcurl -lws2_32 -o bittorrent.exe
 - Does not support seeding
 - Basic peer selection strategy
 - No DHT support
+
+## Credits
+ - uses nlohmann json library Copyright © 2013-2025 [Niels Lohmann](https://nlohmann.me/)
+ - uses sha1 library from [vog/sha1](https://github.com/vog/sha1)

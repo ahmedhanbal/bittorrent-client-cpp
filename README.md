@@ -13,7 +13,8 @@ A lightweight BitTorrent client implementation in C++ that supports downloading 
 - Resume interrupted downloads
 - Cross-platform support (Windows/Linux)
 
-## Prerequisites
+## Compile
+### Prerequisites
 
 - C++17 or later
 - libcurl

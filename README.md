@@ -32,43 +32,57 @@ vcpkg install curl:x64-windows
 ## Building
 
 ### Using CMake (Recommended)
-mkdir build
-cd build
-cmake ..
-cmake --build .
-
+```
+cmake .
+make
+```
 ### Manual Compilation
 
 If CMake isn't available, you can compile directly using g++:
 
 #### Linux
+```
 g++ src/Main.cpp -std=c++17 -lcurl -o bittorrent
-
+```
 #### Windows (using MinGW)
+```
 g++ src/Main.cpp -std=c++17 -lcurl -lws2_32 -o bittorrent.exe
+```
 
-## Usage
 
-# Show help
-./bittorrent help
+## Command Reference
 
-# Decode a bencoded value
-./bittorrent decode "encoded_value"
+| Command | Usage | Description |
+|---------|-------|-------------|
+| `help` | `./bittorrent help` | Display all available commands and their usage |
+| `decode` | `./bittorrent decode <encoded_value>` | Decode a bencoded value and display as JSON |
+| `info` | `./bittorrent info <torrent_file>` | Show detailed information about a torrent file including:<br>- Tracker URL<br>- File length<br>- Info hash<br>- Piece length<br>- Piece hashes |
+| `peers` | `./bittorrent peers <torrent_file>` | List all peers sharing this torrent from tracker |
+| `handshake` | `./bittorrent handshake <torrent_file> <peer_ip:port>` | Perform BitTorrent handshake with a specific peer |
+| `download_piece` | `./bittorrent download_piece -o <output_file> <torrent_file> <piece_index>` | Download a specific piece from the torrent |
+| `download` | `./bittorrent download -o <output_path> <torrent_file>` | Download the complete file from the torrent<br>Use "default" as output_path to use original filename |
 
-# Show torrent information
-./bittorrent info path/to/file.torrent
+### Examples
 
-# List peers from tracker
-./bittorrent peers path/to/file.torrent
+```bash
+# Decode a bencoded string
+./bittorrent decode "d8:announce3:url4:infod4:name6:sample12:piece lengthi16384e6:pieces20:aabbccddee..."
 
-# Perform handshake with a peer
-./bittorrent handshake path/to/file.torrent peer_ip:port
+# Get information about a torrent
+./bittorrent info sample.torrent
 
-# Download a specific piece
-./bittorrent download_piece -o output_file path/to/file.torrent piece_index
+# List peers
+./bittorrent peers sample.torrent
 
-# Download complete file
-./bittorrent download -o output_path path/to/file.torrent
+# Download piece 0 to output.txt
+./bittorrent download_piece -o output.txt sample.torrent 0
+
+# Download complete file using original filename
+./bittorrent download -o default sample.torrent
+
+# Download complete file with custom name
+./bittorrent download -o my_movie.mp4 sample.torrent
+```
 
 ## Project Structure
 

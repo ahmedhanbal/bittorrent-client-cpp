@@ -7,13 +7,17 @@
 #include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
+// Declare functions first
 json decode_bencoded_value(std::string::const_iterator& it, const std::string::const_iterator& end);
 json decode_string(std::string::const_iterator& it, const std::string::const_iterator& end);
 json decode_integer(std::string::const_iterator& it, const std::string::const_iterator& end);
 json decode_list(std::string::const_iterator& it, const std::string::const_iterator& end);
 json decode_dict(std::string::const_iterator& it, const std::string::const_iterator& end);
+json decode_bencoded_value(const std::string& encoded_value);
+std::string bencode_decoded_value(json &decoded_value);
 
-json decode_string(std::string::const_iterator& it, const std::string::const_iterator& end) {
+// Mark all implementations as inline
+inline json decode_string(std::string::const_iterator& it, const std::string::const_iterator& end) {
     std::string number_string;
     while (it != end && std::isdigit(*it)) {
         number_string.push_back(*it++);
@@ -28,7 +32,7 @@ json decode_string(std::string::const_iterator& it, const std::string::const_ite
     return json(str);
 }
 
-json decode_integer(std::string::const_iterator& it, const std::string::const_iterator& end) {
+inline json decode_integer(std::string::const_iterator& it, const std::string::const_iterator& end) {
     ++it; // Skip 'i'
     std::string integer_string;
     while (it != end && *it != 'e') {
@@ -42,7 +46,7 @@ json decode_integer(std::string::const_iterator& it, const std::string::const_it
     return json(integer);
 }
 
-json decode_list(std::string::const_iterator& it, const std::string::const_iterator& end) {
+inline json decode_list(std::string::const_iterator& it, const std::string::const_iterator& end) {
     ++it; // Skip 'l'
     json list = json::array();
     while (it != end && *it != 'e') {
@@ -55,7 +59,7 @@ json decode_list(std::string::const_iterator& it, const std::string::const_itera
     return list;
 }
 
-json decode_dict(std::string::const_iterator& it, const std::string::const_iterator& end) {
+inline json decode_dict(std::string::const_iterator& it, const std::string::const_iterator& end) {
     ++it; // Skip 'd'
     json dict = json::object();
     while (it != end && *it != 'e') {
@@ -70,7 +74,7 @@ json decode_dict(std::string::const_iterator& it, const std::string::const_itera
     return dict;
 }
 
-json decode_bencoded_value(std::string::const_iterator& it, const std::string::const_iterator& end) {
+inline json decode_bencoded_value(std::string::const_iterator& it, const std::string::const_iterator& end) {
     if (it == end) {
         throw std::runtime_error("Empty encoded value");
     }
@@ -89,13 +93,13 @@ json decode_bencoded_value(std::string::const_iterator& it, const std::string::c
     }
 }
 
-json decode_bencoded_value(const std::string& encoded_value) {
+inline json decode_bencoded_value(const std::string& encoded_value) {
     auto it = encoded_value.begin();
     auto end = encoded_value.end();
     return decode_bencoded_value(it, end);
 }
 
-std::string bencode_decoded_value(json &decoded_value) {
+inline std::string bencode_decoded_value(json &decoded_value) {
     std::string encoded_value;
     if (decoded_value.is_string()) {
         std::string str = decoded_value.get<std::string>();
